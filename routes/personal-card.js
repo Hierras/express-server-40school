@@ -104,13 +104,13 @@ router.get('/:emp', function(req, res){
 
 
 /* PUT Personal Card Content */
-router.put('/:emp', function(req, res){
+router.post('/:emp', function(req, res){
     (async ()=>{
         const empId = req.params.emp;
         personsalCard = req.body;
         try{
             const  pool = await sql.connect(sqlConfig);
-            const text = sqlTexts.put;
+            const text = sqlTexts.create;
             const result = await pool.request()
                 .input('empid', empId)
                 .input('date', personsalCard.main.date)
@@ -158,8 +158,12 @@ router.delete('/:emp', function(req, res){
         const empId = req.params.emp;
         personsalCard = req.body;
         const pool = await sql.connect(sqlConfig);
+        const text = sqlTexts.create;
         try{
             /* Find employer */
+        }
+        catch(err){
+
         }
     })()
     sql.on('error', err=>{
@@ -167,7 +171,7 @@ router.delete('/:emp', function(req, res){
     });
 });
 
-/* POST Personal Card Content */
+/* POST Personal Card Content 
 router.post('/', function(req, res){
     (async ()=>{
         
@@ -175,6 +179,6 @@ router.post('/', function(req, res){
     sql.on('error', err=>{
         console.log(err);
     });
-});
+});*/
 
 module.exports = router;
